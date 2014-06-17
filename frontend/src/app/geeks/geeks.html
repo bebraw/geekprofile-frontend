@@ -1,0 +1,13 @@
+<h3>Geeks</h3>
+
+<form role="search" ng-submit="updateLocation()">
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Location">
+    </div>
+</form>
+
+<ul class="todo-list">
+    <li class="todo-item" ng-repeat="geek in geeks">
+        {{geek.name}}
+    </li>
+</ul>
