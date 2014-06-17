@@ -22,7 +22,7 @@ exports.list = function(req, res) {
     var data = cache.get(location);
 
     if(data) {
-        res.json(data);
+        return res.json(data);
     }
 
     github.users('location:' + location, function(err, d) {
