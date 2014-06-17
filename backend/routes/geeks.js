@@ -2,6 +2,8 @@
 
 var async = require('async');
 var prop = require('annofp').prop;
+var Cache = require('mem-cache');
+var cache = new Cache();
 
 var token = require('../config').github;
 var github = require('../lib/github')(token);
@@ -17,7 +19,11 @@ exports.list = function(req, res) {
         return res.json([]);
     }
 
-    console.log('location', location);
+    var data = cache.get(location);
+
+    if(data) {
+        res.json(data);
+    }
 
     github.users('location:' + location, function(err, d) {
         if(err) {
@@ -37,14 +43,18 @@ exports.list = function(req, res) {
                 return res.send(500);
             }
 
-            res.json(users.filter(function(v) {
+            var ret = users.filter(function(v) {
                 return v.hireable;
             }).map(function(v) {
                 delete v.meta;
                 delete v.plan;
 
                 return v;
-            }));
+            });
+
+            cache.set(location, ret);
+
+            res.json(ret);
         });
     });
 };
