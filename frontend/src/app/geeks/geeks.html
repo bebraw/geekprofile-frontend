@@ -1,13 +1,14 @@
-<h3>Geeks</h3>
-
-<form role="search" ng-submit="updateLocation()">
+<form role="search" ng-submit="updateLocation(location)">
     <div class="form-group">
-        <input type="text" class="form-control" placeholder="Location">
+        <input type="text" class="form-control" placeholder="Location" ng-model="location">
     </div>
 </form>
 
 <ul class="todo-list">
     <li class="todo-item" ng-repeat="geek in geeks">
-        {{geek.name}}
+        <img src="http://www.gravatar.com/avatar/{{geek.gravatar_id}}" />
+        <div class="basic"><a href="{{geek.blog}}">{{geek.name}}</a> - {{geek.login}}</div>
+        <div class="followers">{{geek.followers}}</div>
+        <div class="email">{{geek.email}}</div>
     </li>
 </ul>

@@ -3,9 +3,11 @@ angular.module('geekprofile.geeks').controller('GeeksCtrl', function($scope, $ht
 
     $scope.geeks = [];
 
-    $scope.updateLocation = function() {
-        $http.get('http://localhost:4000/geeks?location=demo').success(function(res) {
-            $scope.geeks = res;
-        });
+    $scope.updateLocation = function(location) {
+        if(location) {
+            $http.get('http://localhost:4000/geeks?location=' + location).success(function(res) {
+                $scope.geeks = res;
+            });
+        }
     };
 });
