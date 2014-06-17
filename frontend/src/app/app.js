@@ -1,5 +1,6 @@
 angular.module('geekprofile', [
     'ngRoute',
+    'snap',
     'geekprofile.geeks',
     'geekprofile-templates'
 ])

@@ -1,7 +1,10 @@
-angular.module('geekprofile.geeks').controller('GeeksCtrl', function($scope, $http) {
+angular.module('geekprofile.geeks').controller('GeeksCtrl', function($scope, $http, snapRemote) {
     'use strict';
 
+    $scope.selectedGeek = null;
     $scope.geeks = [];
+
+    snapRemote.open('left');
 
     $scope.updateLocation = function(location) {
         if(location) {
@@ -10,4 +13,8 @@ angular.module('geekprofile.geeks').controller('GeeksCtrl', function($scope, $ht
             });
         }
     };
+
+    $scope.selectGeek = function(geek) {
+        $scope.selectedGeek = geek;
+    }
 });

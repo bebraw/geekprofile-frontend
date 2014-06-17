@@ -1,14 +1,25 @@
-<form role="search" ng-submit="updateLocation(location)">
-    <div class="form-group">
-        <input type="text" class="form-control" placeholder="Location" ng-model="location">
-    </div>
-</form>
+<snap-drawer>
+    <form class="search" role="search" ng-submit="updateLocation(location)">
+        <input type="text" class="search-field" placeholder="Location" ng-model="location">
+    </form>
 
-<ul class="todo-list">
-    <li class="todo-item" ng-repeat="geek in geeks">
-        <img src="http://www.gravatar.com/avatar/{{geek.gravatar_id}}" />
-        <div class="basic"><a href="{{geek.blog}}">{{geek.name}}</a> - {{geek.login}}</div>
-        <div class="followers">{{geek.followers}}</div>
-        <div class="email">{{geek.email}}</div>
-    </li>
-</ul>
+    <div class="drawer-inner">
+        <ul>
+            <li ng-repeat="geek in geeks">
+                <a ng-click="selectGeek(geek)">{{geek.name}}</a>
+            </li>
+        </ul>
+    </div>
+</snap-drawer>
+
+<snap-content>
+    <div class="info" ng-show="selectedGeek">
+        <img src="http://www.gravatar.com/avatar/{{selectedGeek.gravatar_id}}" />
+        <div class="basic"><a href="{{selectedGeek.blog}}">{{selectedGeek.name}}</a> - {{selectedGeek.login}}</div>
+        <div class="followers">{{selectedGeek.followers}}</div>
+        <div class="email">{{selectedGeek.email}}</div>
+    </div>
+
+    TODO: show tweets + rss here
+    </div>
+</snap-content>
