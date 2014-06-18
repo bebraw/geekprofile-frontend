@@ -23,6 +23,8 @@
         <div class="email">{{selectedGeek.email}}</div>
     </div>
 
+    <div class="loading" ng-show="selectedGeek && !selectedGeek.loaded">Loading...</div>
+
     <div class="rss" ng-show="selectedGeek.rss">
         <h2>RSS</h2>
 

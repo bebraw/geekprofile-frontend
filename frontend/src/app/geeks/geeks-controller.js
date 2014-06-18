@@ -19,7 +19,7 @@ angular.module('geekprofile.geeks').controller('GeeksCtrl', function($scope, $ht
     $scope.selectGeek = function(geek) {
         $scope.selectedGeek = geek;
 
-        if(!geek._updated) {
+        if(!geek.loaded) {
             updateGeek(geek);
         }
     };
@@ -30,7 +30,7 @@ angular.module('geekprofile.geeks').controller('GeeksCtrl', function($scope, $ht
                 geek[k] = res[k];
             }
 
-            geek._updated = true;
+            geek.loaded = true;
         });
     }
 });
