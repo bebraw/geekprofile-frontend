@@ -6,10 +6,11 @@ var Cache = require('mem-cache');
 
 var token = require('../config').github;
 var github = require('../lib/github')(token);
+var getRSS = require('../lib/rss').get;
 
 
 var matchers = decorate({
-    nick: getUser,
+    nick: getByNick,
     location: getByLocation
 }, cacheData);
 
@@ -98,8 +99,23 @@ function getByLocation(location, cb) {
                     name: v.name,
                     nick: v.nick,
                     hireable: v.hireable
-                }
+                };
             }));
+        });
+    });
+}
+
+function getByNick(nick, cb) {
+    getUser(nick, function(err, d) {
+        if(err) {
+            return cb(err);
+        }
+
+        getRSS(d.homepage, function(err, rss) {
+            // skip err in this case
+            d.rss = rss;
+
+            cb(null, d);
         });
     });
 }
