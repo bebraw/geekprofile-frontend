@@ -19,9 +19,10 @@ exports.get = function getRSS(url, cb) {
                 cb(null, res.slice(0, 10).map(function(v) {
                     return {
                         title: v.title,
-                        description: v.description,
-                        date: v.date,
-                        categories: v.categories
+                        url: v.link,
+                        //description: v.description, (whole entry)
+                        //date: v.date,
+                        //categories: v.categories
                     };
                 }));
             });

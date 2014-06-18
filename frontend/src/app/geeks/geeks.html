@@ -21,6 +21,14 @@
         <div class="email">{{selectedGeek.email}}</div>
     </div>
 
-    TODO: show tweets + rss here
+    <div class="rss" ng-show="selectedGeek">
+        <ul>
+            <li class="rss-entry" ng-repeat="entry in selectedGeek.rss">
+                <a href="{{entry.url}}">{{entry.title}}</a>
+            </li>
+        </ul>
+    </div>
+
+    TODO: show tweets
     </div>
 </snap-content>
