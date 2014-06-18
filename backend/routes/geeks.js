@@ -43,9 +43,7 @@ exports.list = function(req, res) {
                 return res.send(500);
             }
 
-            var ret = users.filter(function(v) {
-                return v.hireable;
-            }).map(function(v) {
+            var ret = users.map(function(v) {
                 delete v.meta;
                 delete v.plan;
 

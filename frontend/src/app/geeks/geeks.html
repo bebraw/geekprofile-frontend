@@ -1,11 +1,12 @@
 <snap-drawer>
     <form class="search" role="search" ng-submit="updateLocation(location)">
         <input type="text" class="search-field" placeholder="Location" ng-model="location">
+        <label>Show only hireable<input type="checkbox" ng-model="hireable"></label>
     </form>
 
     <div class="drawer-inner">
         <ul>
-            <li ng-repeat="geek in geeks">
+            <li ng-repeat="geek in geeks | filter: {hireable: hireable}">
                 <a ng-click="selectGeek(geek)">{{geek.name}}</a>
             </li>
         </ul>
