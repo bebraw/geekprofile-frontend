@@ -14,18 +14,18 @@
 </snap-drawer>
 
 <snap-content>
-    <h2>Details</h2>
-
     <div class="info" ng-show="selectedGeek">
+        <h2>Info</h2>
+
         <img src="http://www.gravatar.com/avatar/{{selectedGeek.gravatar}}" />
         <div class="basic"><a href="{{selectedGeek.homepage}}">{{selectedGeek.name}}</a> - {{selectedGeek.nick}}</div>
         <div class="followers">{{selectedGeek.followers}}</div>
         <div class="email">{{selectedGeek.email}}</div>
     </div>
 
-    <h2>RSS</h2>
+    <div class="rss" ng-show="selectedGeek.rss">
+        <h2>RSS</h2>
 
-    <div class="rss" ng-show="selectedGeek">
         <ul>
             <li class="rss-entry" ng-repeat="entry in selectedGeek.rss">
                 <a href="{{entry.url}}">{{entry.title}}</a>
@@ -33,8 +33,13 @@
         </ul>
     </div>
 
-    <h2>Twitter</h2>
+    <div class="tweets" ng-show="selectedGeek.tweets">
+        <h2>Twitter</h2>
 
-    TODO: show tweets
+        <ul>
+            <li class="tweet-entry" ng-repeat="entry in selectedGeek.tweets">
+                <a href="{{entry.url}}">{{entry.text}}</a>
+            </li>
+        </ul>
     </div>
 </snap-content>
