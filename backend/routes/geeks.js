@@ -9,7 +9,7 @@ var github = require('../lib/github')(token);
 
 
 var matchers = decorate({
-    id: getById,
+    nick: getUser,
     location: getByLocation
 }, cacheData);
 
@@ -65,7 +65,7 @@ function cacheData(fn) {
             return cb(null, data);
         }
 
-        fn(data, function(err, d) {
+        fn(a, function(err, d) {
             if(err) {
                 return cb(err);
             }
@@ -77,13 +77,6 @@ function cacheData(fn) {
     };
 }
 
-function getById(id, cb) {
-    console.log('should get by id now');
-
-    // TODO
-    cb();
-}
-
 function getByLocation(location, cb) {
     github.users('location:' + location, function(err, d) {
         if(err) {
@@ -92,22 +85,34 @@ function getByLocation(location, cb) {
 
         var usernames = d.users.map(prop('username'));
 
-        async.map(usernames, github.user, function(err, users) {
+        async.map(usernames, getUser, function(err, users) {
             if(err) {
                 return cb(err);
             }
 
             cb(null, users.filter(function(v) {
                 return v.type === 'User';
-            }).map(function(v) {
-                delete v.meta;
-                delete v.plan;
-                delete v.type;
-
-                v.name = v.name || v.login;
-
-                return v;
             }));
+        });
+    });
+}
+
+function getUser(nick, cb) {
+    github.user(nick, function(err, d) {
+        if(err) {
+            return cb(err);
+        }
+
+        cb(null, {
+            name: d.name || d.login,
+            nick: d.login,
+            homepage: d.blog,
+            email: d.email,
+            gravatar: d.gravatar_id,
+            followers: d.followers,
+            following: d.following,
+            id: d.id,
+            type: d.type
         });
     });
 }
