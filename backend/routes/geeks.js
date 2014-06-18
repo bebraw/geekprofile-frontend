@@ -92,6 +92,13 @@ function getByLocation(location, cb) {
 
             cb(null, users.filter(function(v) {
                 return v.type === 'User';
+            }).map(function(v) {
+                return {
+                    gravatar: v.gravatar,
+                    name: v.name,
+                    nick: v.nick,
+                    hireable: v.hireable
+                }
             }));
         });
     });
@@ -112,6 +119,7 @@ function getUser(nick, cb) {
             followers: d.followers,
             following: d.following,
             id: d.id,
+            hireable: d.hireable,
             type: d.type
         });
     });
