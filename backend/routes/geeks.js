@@ -47,6 +47,8 @@ exports.list = function(req, res) {
                 delete v.meta;
                 delete v.plan;
 
+                v.name = v.name || v.login;
+
                 return v;
             });
 
