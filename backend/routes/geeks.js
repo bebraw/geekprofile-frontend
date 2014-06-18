@@ -32,9 +32,7 @@ exports.list = function(req, res) {
             return res.send(500);
         }
 
-        var usernames = d.users.filter(function(user) {
-            return user.type === 'user';
-        }).map(prop('username'));
+        var usernames = d.users.map(prop('username'));
 
         async.map(usernames, github.user, function(err, users) {
             if(err) {
@@ -43,9 +41,12 @@ exports.list = function(req, res) {
                 return res.send(500);
             }
 
-            var ret = users.map(function(v) {
+            var ret = users.filter(function(v) {
+                return v.type === 'User';
+            }).map(function(v) {
                 delete v.meta;
                 delete v.plan;
+                delete v.type;
 
                 v.name = v.name || v.login;
 
