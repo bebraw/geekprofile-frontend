@@ -1,6 +1,8 @@
 angular.module('geekprofile.geeks').controller('GeeksCtrl', function($scope, $http, snapRemote) {
     'use strict';
 
+    var root = 'http://localhost:4000/geeks';
+
     $scope.selectedGeek = null;
     $scope.geeks = [];
 
@@ -8,7 +10,7 @@ angular.module('geekprofile.geeks').controller('GeeksCtrl', function($scope, $ht
 
     $scope.updateLocation = function(location) {
         if(location) {
-            $http.get('http://localhost:4000/geeks?location=' + location).success(function(res) {
+            $http.get(root + '?location=' + location).success(function(res) {
                 $scope.geeks = res;
             });
         }
@@ -16,5 +18,19 @@ angular.module('geekprofile.geeks').controller('GeeksCtrl', function($scope, $ht
 
     $scope.selectGeek = function(geek) {
         $scope.selectedGeek = geek;
+
+        if(!geek._updated) {
+            updateGeek(geek);
+        }
+    };
+
+    function updateGeek(geek) {
+        $http.get(root + '?nick=' + geek.nick).success(function(res) {
+            for(var k in res) {
+                geek[k] = res[k];
+            }
+
+            geek._updated = true;
+        });
     }
 });
