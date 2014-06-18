@@ -4,9 +4,12 @@ var async = require('async');
 var prop = require('annofp').prop;
 var Cache = require('mem-cache');
 
-var token = require('../config').github;
-var github = require('../lib/github')(token);
+var config = require('../config');
+var github = require('../lib/github')(config.github);
 var getRSS = require('../lib/rss').get;
+var getTweets = require('../lib/tweets')(config.twitter);
+
+require('date-utils');
 
 
 var matchers = decorate({
@@ -106,6 +109,7 @@ function getByLocation(location, cb) {
 }
 
 function getByNick(nick, cb) {
+    // TODO: tidy up
     getUser(nick, function(err, d) {
         if(err) {
             return cb(err);
@@ -113,11 +117,25 @@ function getByNick(nick, cb) {
 
         getRSS(d.homepage, function(err, rss) {
             // skip err in this case
-            d.rss = rss;
+            d.rss = rss || [];
 
-            cb(null, d);
+            getTwitter(d.nick, function(err, tweets) {
+                // skip err in this case
+                d.tweets = tweets || [];
+
+                cb(null, d);
+            });
         });
     });
+}
+
+function getTwitter(nick, cb) {
+    var weekAgo = new Date().removeDays(7);
+
+    getTweets({
+        user: nick,
+        date: weekAgo
+    }, cb);
 }
 
 function getUser(nick, cb) {
