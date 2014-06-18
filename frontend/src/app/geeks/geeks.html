@@ -7,7 +7,7 @@
     <div class="drawer-inner">
         <ul>
             <li ng-repeat="geek in geeks | filter: {hireable: hireable}">
-                <a ng-click="selectGeek(geek)">{{geek.name}}</a>
+                <a ng-click="selectGeek(geek)"><img src="http://www.gravatar.com/avatar/{{geek.gravatar}}?s=20" /> {{geek.name}}</a>
             </li>
         </ul>
     </div>
