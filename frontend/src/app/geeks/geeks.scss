@@ -84,90 +84,14 @@ html, body {
     display: none;
 }
 
-/* Show the "Drag" background in the demo */
-#content {
-    background: #bfc7d8 url(drag.png) center 75% no-repeat;
-}
-
-/* Demo toolbar styles */
-#toolbar {
-    background: #536ea7;
-    border-bottom: 1px solid #111b32;
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    width: auto;
-    height: 44px;
-}
-
-#toolbar h1 {
-    color: #fff;
-    font-size: 16px;
-    line-height: 22px;
-    text-align: center;
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.8);
-    position: absolute;
-    top: 0;
-    right: 44px;
-    left: 44px;
-    width: auto;
-    height: 44px;
-}
-
-#open-left {
-    background: url(open.png) center center no-repeat;
-    display: block;
-    width: 44px;
-    height: 44px;
-}
-
-/* Show the red "No Drag" box in the demo */
-
-#no-drag,
-#do-drag {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 50%;
-    height: 100px;
-    margin-left: -25%;
-    margin-top: -50px;
-    background: red;
-    color: #FFF;
-    text-align: center;
-    line-height: 100px;
-}
-
-#do-drag {
-    background: green;
-}
-
-/* Styles for the social buttons in the demo */
-.demo-social {
-    padding: 0 15px;
-}
-
-/* Show the translucent white "Toggle" boxes in the demo */
-.toggler {
-    width: 80%;
-    background: rgba(255, 255, 255, 0.5);
-    margin: 0 auto;
-    position: relative;
-    top: 70px;
-    padding: 20px;
-    margin-bottom: 20px;
-    text-align: center;
+.photo {
+    float: right;
 }
 
 /* Styles for expanding "Search" input in the "Expanding" demo */
 .search {
     padding: 0.5em;
     padding-bottom: 10px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-    -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
-    -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .search-field {

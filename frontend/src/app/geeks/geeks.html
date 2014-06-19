@@ -1,7 +1,12 @@
 <snap-drawer>
     <form class="search" role="search" ng-submit="updateLocation(location)">
-        <input type="text" class="search-field" placeholder="Location" ng-model="location">
-        <label>Show only hireable<input type="checkbox" ng-model="hireable"></label>
+        <label>
+            <input type="text" class="search-field" placeholder="Location" ng-model="location">
+        </label>
+        <label class="checkbox">
+            <input type="checkbox" ng-model="hireable">
+            Show only hireable
+        </label>
     </form>
 
     <div class="drawer-inner">
@@ -14,34 +19,40 @@
 </snap-drawer>
 
 <snap-content>
-    <div class="info" ng-show="selectedGeek">
-        <h2>Info</h2>
+    <div class="row">
+        <div class="four columns">
+            <div class="info" ng-show="selectedGeek">
+                <h2>Info</h2>
 
-        <img src="http://www.gravatar.com/avatar/{{selectedGeek.gravatar}}" />
-        <div class="basic"><a href="{{selectedGeek.homepage}}">{{selectedGeek.name}}</a> - {{selectedGeek.nick}}</div>
-        <div class="followers">{{selectedGeek.followers}}</div>
-        <div class="email">{{selectedGeek.email}}</div>
-    </div>
+                <img class="photo" src="http://www.gravatar.com/avatar/{{selectedGeek.gravatar}}" />
+                <div class="basic"><a href="{{selectedGeek.homepage}}">{{selectedGeek.name}}</a></div>
+                <div class="github"><a href="https://github.com/{{selectedGeek.nick}}">{{selectedGeek.nick}}</a></div>
+                <div class="followers">Followers: {{selectedGeek.followers}}</div>
+                <div class="email">Email: {{selectedGeek.email}}</div>
+            </div>
 
-    <div class="loading" ng-show="selectedGeek && !selectedGeek.loaded">Loading...</div>
+            <div class="rss" ng-show="selectedGeek.rss">
+                <h2>RSS</h2>
 
-    <div class="rss" ng-show="selectedGeek.rss">
-        <h2>RSS</h2>
+                <ul>
+                    <li class="rss-entry" ng-repeat="entry in selectedGeek.rss">
+                        <a href="{{entry.url}}">{{entry.title}}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="eight columns">
+            <div class="loading" ng-show="selectedGeek && !selectedGeek.loaded">Loading...</div>
 
-        <ul>
-            <li class="rss-entry" ng-repeat="entry in selectedGeek.rss">
-                <a href="{{entry.url}}">{{entry.title}}</a>
-            </li>
-        </ul>
-    </div>
+            <div class="tweets" ng-show="selectedGeek.tweets">
+                <h2>Twitter</h2>
 
-    <div class="tweets" ng-show="selectedGeek.tweets">
-        <h2>Twitter</h2>
-
-        <ul>
-            <li class="tweet-entry" ng-repeat="entry in selectedGeek.tweets">
-                <a href="{{entry.url}}">{{entry.text}}</a>
-            </li>
-        </ul>
+                <ul>
+                    <li class="tweet-entry" ng-repeat="entry in selectedGeek.tweets">
+                        <a href="{{entry.url}}">{{entry.text}}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 </snap-content>
