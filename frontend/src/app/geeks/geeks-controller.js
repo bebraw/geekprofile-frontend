@@ -6,6 +6,10 @@ angular.module('geekprofile.geeks').controller('GeeksCtrl', function($scope, $ht
     $scope.selectedGeek = null;
     $scope.geeks = [];
 
+    $scope.snapOpts = {
+      disable: 'right'
+    };
+
     snapRemote.open('left');
 
     $scope.updateLocation = function(location) {
